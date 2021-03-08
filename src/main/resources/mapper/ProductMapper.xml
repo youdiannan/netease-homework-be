@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.contentsalesystem.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.netease.contentsalesystem.entity.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="product_abstract" jdbcType="VARCHAR" property="productAbstract" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="product_status" jdbcType="TINYINT" property="productStatus"
+            javaType="com.netease.contentsalesystem.constant.ProductStatus"
+            typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
+    />
+    <result column="seller" jdbcType="INTEGER" property="seller" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, product_abstract, description, img_url, price, stock, product_status, seller
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+  </select>
+  <select id="findAllByProductIdList" parameterType="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from product
+    <where>
+      <if test="productIdList.size() > 0">
+        id in
+        <foreach collection="productIdList" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+    </where>
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.netease.contentsalesystem.entity.Product"
+          useGeneratedKeys="true" keyProperty="id"
+  >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="productAbstract != null">
+        product_abstract,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="productStatus != null">
+        product_status,
+      </if>
+      <if test="seller != null">
+        seller
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productAbstract != null">
+        #{productAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="productStatus != null">
+        #{productStatus,jdbcType=TINYINT},
+      </if>
+      <if test="seller != null">
+        seller = #{seller,jdbcType=TINYINT}
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.netease.contentsalesystem.entity.Product">
+    update product
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="productAbstract != null">
+        product_abstract = #{productAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="productStatus != null">
+        product_status = #{productStatus,jdbcType=TINYINT},
+      </if>
+      <if test="seller != null">
+        seller = #{seller,jdbcType=TINYINT}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
