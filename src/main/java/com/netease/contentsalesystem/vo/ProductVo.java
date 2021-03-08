@@ -28,4 +28,7 @@ public class ProductVo {
     private boolean traded;
 
     private Integer tradeNum;
+
+    // 当时交易价格
+    private Integer oldPrice;
 }

@@ -12,6 +12,7 @@ public class LoginConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         InterceptorRegistration registration = registry.addInterceptor(new LoginInterceptor());
-        registration.addPathPatterns("/product", "/cart", "/cart/**", "/account", "/upload");
+        registration.addPathPatterns("/api/product", "/api/cart", "/api/cart/**",
+                "/api/account", "/api/upload").excludePathPatterns("/static/**");
     }
 }

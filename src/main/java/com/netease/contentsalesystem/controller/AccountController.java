@@ -19,7 +19,7 @@ public class AccountController {
     @Autowired
     private IAccountService accountService;
 
-    @GetMapping("/account")
+    @GetMapping("/api/account")
     public List<AccountItem> list(HttpSession session) {
         User user = (User) session.getAttribute(CURRENT_USER);
         return accountService.list(user.getId());

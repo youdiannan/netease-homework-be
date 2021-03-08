@@ -27,8 +27,6 @@ public class CartServiceImpl implements ICartService {
 
     private static final String CART_REDIS_KEY_TEMPLATE = "cart_%d";
 
-    private final Gson gson = new Gson();
-
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
@@ -44,6 +42,9 @@ public class CartServiceImpl implements ICartService {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         // 获取用户对应的购物车所有商品数据
         Map<String, String> entries = hashOperations.entries(redisKey);
+        if (entries.isEmpty()) return new Cart();
+
+        // 根据productId获取商品数据
         List<Integer> productIds = entries.keySet().stream().map(Integer::parseInt).collect(Collectors.toList());
         List<Product> productList = productService.findAllByProductIdList(productIds);
         List<CartItem> cartItemList = new ArrayList<>();
@@ -69,7 +70,6 @@ public class CartServiceImpl implements ICartService {
 
     @Override
     public CommonResponse edit(Integer userId, CartItem cartItem) {
-        // TODO: 库存校验
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, userId);
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         hashOperations.put(redisKey, String.valueOf(cartItem.getProductId()), String.valueOf(cartItem.getCount()));

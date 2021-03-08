@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 import static com.netease.contentsalesystem.constant.Const.CURRENT_USER;
 
@@ -22,19 +21,20 @@ public class CartController {
     @Autowired
     private ICartService cartService;
 
-    @GetMapping("/cart")
+    @GetMapping("/api/cart")
     public Cart list(HttpSession session) {
         User user = (User) session.getAttribute(CURRENT_USER);
+        // 由拦截器来做登录验证
         return cartService.list(user.getId());
     }
 
-    @PostMapping("/cart")
+    @PostMapping("/api/cart")
     public CommonResponse edit(HttpSession session, @RequestBody CartItem cartItem) {
         User user = (User) session.getAttribute(CURRENT_USER);
         return cartService.edit(user.getId(), cartItem);
     }
 
-    @GetMapping("/cart/checkout")
+    @GetMapping("/api/cart/checkout")
     public CommonResponse checkout(HttpSession session) {
         User user = (User) session.getAttribute(CURRENT_USER);
         return cartService.checkout(user.getId());

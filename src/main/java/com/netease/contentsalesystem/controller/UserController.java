@@ -24,13 +24,13 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/user")
+    @GetMapping("/api/user")
     public User currentUser(HttpSession session) {
         User user = (User) session.getAttribute(CURRENT_USER);
         return user;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public User login(HttpSession session, @RequestBody LoginForm loginForm) throws LoginException {
         log.info("用户登录: {}", loginForm.getUsername());
         User user = userService.login(loginForm);
@@ -43,7 +43,7 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/api/logout")
     public CommonResponse logout(HttpSession session) {
         session.removeAttribute(CURRENT_USER);
         return new CommonResponse(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getMessage());

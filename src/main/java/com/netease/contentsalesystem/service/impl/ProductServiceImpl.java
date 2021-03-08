@@ -1,6 +1,7 @@
 package com.netease.contentsalesystem.service.impl;
 
 import com.netease.contentsalesystem.constant.ResponseCode;
+import com.netease.contentsalesystem.dao.AccountItemMapper;
 import com.netease.contentsalesystem.dao.ProductMapper;
 import com.netease.contentsalesystem.dao.UserTradedItemMapper;
 import com.netease.contentsalesystem.entity.Product;
@@ -24,6 +25,9 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private UserTradedItemMapper userTradedItemMapper;
+    
+    @Autowired
+    private AccountItemMapper accountItemMapper;
 
     @Override
     public List<ProductVo> list(Integer userId) {
@@ -41,6 +45,9 @@ public class ProductServiceImpl implements IProductService {
         BeanUtils.copyProperties(product, productVo);
         if (userId != null && tradedUsers.contains(userId)) {
             productVo.setTraded(true);
+            // 需要查询交易时的价格。
+            // 但是如果可以多次购买的话，应该返回哪一次的价格？
+            // Integer byUserIdAndProductId = accountItemMapper.findByUserIdAndProductId(userId, productId);
         } else {
             productVo.setTraded(false);
         }

@@ -11,6 +11,8 @@ public class AccountItem {
 
     private String productName;
 
+    private String productAbstract;
+
     private String description;
 
     private BigDecimal price;
@@ -20,6 +22,14 @@ public class AccountItem {
     private BigDecimal totalAmount;
 
     private String imgUrl;
+
+    public String getProductAbstract() {
+        return productAbstract;
+    }
+
+    public void setProductAbstract(String productAbstract) {
+        this.productAbstract = productAbstract;
+    }
 
     public Long getId() {
         return id;

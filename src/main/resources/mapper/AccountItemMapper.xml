@@ -11,9 +11,10 @@
     <result column="count" jdbcType="INTEGER" property="count" />
     <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="product_abstract" jdbcType="VARCHAR" property="productAbstract" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, product_id, product_name, description, price, count, total_amount, img_url
+    id, user_id, product_id, product_name, description, price, count, total_amount, img_url, product_abstract
   </sql>
   <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -68,6 +69,9 @@
       <if test="imgUrl != null">
         img_url,
       </if>
+      <if test="productAbstract != null">
+        product_abstract,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -97,6 +101,9 @@
       <if test="imgUrl != null">
         #{imgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="productAbstract != null">
+        #{productAbstract,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <insert id="batchInsert" parameterType="list">
@@ -113,7 +120,8 @@
       #{item.price,jdbcType=DECIMAL},
       #{item.count,jdbcType=INTEGER},
       #{item.totalAmount,jdbcType=DECIMAL},
-      #{item.imgUrl,jdbcType=VARCHAR}
+      #{item.imgUrl,jdbcType=VARCHAR},
+      #{item.productAbstract,jdbcType=VARCHAR}
       )
     </foreach>
   </insert>
@@ -143,6 +151,9 @@
       </if>
       <if test="imgUrl != null">
         img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productAbstract != null">
+        img_url = #{productAbstract,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
