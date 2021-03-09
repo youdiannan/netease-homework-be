@@ -16,7 +16,6 @@ import java.util.UUID;
 @Service("fileService")
 public class FileServiceImpl implements IFileService {
 
-    private static final String UPLOAD_PATH_PATTERN = "upload.%s";
     public static final String DEFAULT_UPLOAD_PATH = "upload.default";
 
     // 用来获取文件上传路径配置

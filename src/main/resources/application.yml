@@ -30,7 +30,7 @@ mybatis:
 
 # 文件上传路径配置
 upload:
-  default: 'D:\file_upload'
+  default: 'D:\JavaProjects\content-sale-system\src\main\resources\static\img'
 
 
 
