@@ -1,5 +1,6 @@
 package com.netease.contentsalesystem.controller;
 
+import com.netease.contentsalesystem.constant.ResponseCode;
 import com.netease.contentsalesystem.entity.Product;
 import com.netease.contentsalesystem.entity.User;
 import com.netease.contentsalesystem.service.IFileService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -28,14 +30,25 @@ public class ProductController {
     @GetMapping("/api/product")
     public List<ProductVo> list(HttpSession session) {
         User user = (User) session.getAttribute(CURRENT_USER);
-        return productService.list(user != null ? user.getId() : null);
+        return productService.list(user);
     }
 
-    // 返回修改后商品的id
+    // 成功则返回修改后商品的id
     @PostMapping("/api/product")
-    public CommonResponse<Integer> edit(HttpSession session, @RequestBody Product product) {
+    public CommonResponse edit(HttpSession session, @RequestBody @Valid Product product) {
+        // 编辑时需保证商品id不为空
+        if (null == product.getId()) {
+            return new CommonResponse(ResponseCode.FAILED);
+        }
         User user = (User) session.getAttribute(CURRENT_USER);
         return productService.edit(user.getId(), product);
+    }
+
+    // 添加商品，成功则返回新增商品的id
+    @PutMapping("/api/product")
+    public CommonResponse add(HttpSession session, @RequestBody @Valid Product product) {
+        User user = (User) session.getAttribute(CURRENT_USER);
+        return productService.add(user.getId(), product);
     }
 
     // 图片上传，返回上传成功后的图片url
@@ -47,7 +60,8 @@ public class ProductController {
     @GetMapping("/api/product/{productId}")
     public ProductVo detail(HttpSession session, @PathVariable Integer productId) {
         User user = (User) session.getAttribute(CURRENT_USER);
-        return productService.detail(user == null ? null : user.getId(), productId);
+        Integer userId = user == null ? null : user.getId();
+        return productService.detail(userId, productId);
     }
 
     @DeleteMapping("/api/product/{productId}")

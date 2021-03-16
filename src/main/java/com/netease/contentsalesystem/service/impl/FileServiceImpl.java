@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static com.netease.contentsalesystem.constant.Const.DEFAULT_UPLOAD_PATH;
+
 @Service("fileService")
 public class FileServiceImpl implements IFileService {
-
-    public static final String DEFAULT_UPLOAD_PATH = "upload.default";
 
     // 用来获取文件上传路径配置
     @Autowired

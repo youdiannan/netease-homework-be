@@ -1,8 +1,13 @@
 package com.netease.contentsalesystem.vo;
 
+
+import javax.validation.constraints.NotNull;
+
 public class LoginForm {
 
+    @NotNull
     private String username;
+    @NotNull
     private String password;
 
     public String getUsername() {

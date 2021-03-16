@@ -1,6 +1,5 @@
 package com.netease.contentsalesystem.service.impl;
 
-import com.google.gson.Gson;
 import com.netease.contentsalesystem.constant.ResponseCode;
 import com.netease.contentsalesystem.entity.Cart;
 import com.netease.contentsalesystem.entity.CartItem;
@@ -72,6 +71,13 @@ public class CartServiceImpl implements ICartService {
     public CommonResponse edit(Integer userId, CartItem cartItem) {
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, userId);
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
+        /**
+         * {
+         *     cart_#{userId}: {
+         *         #{productId} : #{productCount}
+         *     }
+         * }
+         */
         hashOperations.put(redisKey, String.valueOf(cartItem.getProductId()), String.valueOf(cartItem.getCount()));
         return new CommonResponse(ResponseCode.SUCCESS.getCode(), "添加成功");
     }

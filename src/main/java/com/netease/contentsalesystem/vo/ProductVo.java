@@ -1,11 +1,11 @@
 package com.netease.contentsalesystem.vo;
 
-import com.netease.contentsalesystem.constant.ProductStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,12 +23,12 @@ public class ProductVo {
 
     private BigDecimal price;
 
-    private ProductStatus productStatus;
+    // private ProductStatus productStatus;
 
     private boolean traded;
 
     private Integer tradeNum;
 
-    // 当时交易价格
-    private Integer oldPrice;
+    // 曾经的交易价格
+    private List<BigDecimal> oldPriceList;
 }

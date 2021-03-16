@@ -6,7 +6,6 @@ import com.netease.contentsalesystem.exception.LoginException;
 import com.netease.contentsalesystem.service.IUserService;
 import com.netease.contentsalesystem.vo.CommonResponse;
 import com.netease.contentsalesystem.vo.LoginForm;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import static com.netease.contentsalesystem.constant.Const.CURRENT_USER;
 
 @RestController
-@Slf4j
 public class UserController {
 
     @Autowired
@@ -31,8 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public User login(HttpSession session, @RequestBody LoginForm loginForm) throws LoginException {
-        log.info("用户登录: {}", loginForm.getUsername());
+    public User login(HttpSession session, @RequestBody @Valid LoginForm loginForm) throws LoginException {
         User user = userService.login(loginForm);
         if (user != null) {
             session.setAttribute(CURRENT_USER, user);

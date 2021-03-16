@@ -3,6 +3,7 @@ package com.netease.contentsalesystem.dao;
 import com.netease.contentsalesystem.entity.AccountItem;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface AccountItemMapper {
@@ -15,6 +16,8 @@ public interface AccountItemMapper {
     int update(AccountItem record);
 
     List<AccountItem> list(Integer userId);
+
+    List<BigDecimal> listPrices(@Param("userId") Integer userId, @Param("productId") Integer productId);
 
     Integer findByUserIdAndProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
 

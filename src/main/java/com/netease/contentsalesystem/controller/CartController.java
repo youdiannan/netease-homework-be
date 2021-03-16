@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import static com.netease.contentsalesystem.constant.Const.CURRENT_USER;
 
@@ -29,7 +30,7 @@ public class CartController {
     }
 
     @PostMapping("/api/cart")
-    public CommonResponse edit(HttpSession session, @RequestBody CartItem cartItem) {
+    public CommonResponse edit(HttpSession session, @RequestBody @Valid CartItem cartItem) {
         User user = (User) session.getAttribute(CURRENT_USER);
         return cartService.edit(user.getId(), cartItem);
     }

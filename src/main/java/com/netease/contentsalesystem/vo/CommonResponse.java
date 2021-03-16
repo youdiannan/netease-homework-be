@@ -26,4 +26,9 @@ public class CommonResponse<T> {
         this.message = ResponseCode.SUCCESS.getMessage();
         this.data = data;
     }
+
+    public CommonResponse(ResponseCode responseCode) {
+        this.code = responseCode.getCode();
+        this.message = responseCode.getMessage();
+    }
 }

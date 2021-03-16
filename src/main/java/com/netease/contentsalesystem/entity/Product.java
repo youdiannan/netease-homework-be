@@ -1,25 +1,27 @@
 package com.netease.contentsalesystem.entity;
 
-import com.netease.contentsalesystem.constant.ProductStatus;
-
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public class Product {
     private Integer id;
 
+    @Size(min = 2, max = 80)
     private String name;
 
+    @Size(min = 2, max = 140)
     private String productAbstract;
 
+    @Size(min = 2, max = 1000)
     private String description;
 
     private String imgUrl;
 
     private BigDecimal price;
 
-    private Integer stock;
+    private Integer sold;
 
-    private ProductStatus productStatus;
+    // private ProductStatus productStatus;
 
     private Integer seller;
 
@@ -71,21 +73,21 @@ public class Product {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
+    public Integer getSold() {
+        return sold;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setSold(Integer sold) {
+        this.sold = sold;
     }
 
-    public ProductStatus getProductStatus() {
-        return productStatus;
-    }
-
-    public void setProductStatus(ProductStatus productStatus) {
-        this.productStatus = productStatus;
-    }
+    // public ProductStatus getProductStatus() {
+    //     return productStatus;
+    // }
+    //
+    // public void setProductStatus(ProductStatus productStatus) {
+    //     this.productStatus = productStatus;
+    // }
 
     public String getProductAbstract() {
         return productAbstract;

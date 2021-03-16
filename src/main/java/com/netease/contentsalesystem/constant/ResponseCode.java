@@ -1,11 +1,10 @@
 package com.netease.contentsalesystem.constant;
 
-import lombok.Data;
-
 public enum ResponseCode {
 
     FAILED(-1, "fail"),
-    SUCCESS(0, "success");
+    SUCCESS(0, "success"),
+    PARAM_ERROR(10, "参数错误");
 
     private Integer code;
     private String message;

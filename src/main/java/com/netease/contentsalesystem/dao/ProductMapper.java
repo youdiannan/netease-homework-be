@@ -14,6 +14,8 @@ public interface ProductMapper {
 
     int update(Product record);
 
+    int updateSold(@Param("productId") Integer productId, @Param("count") Integer count);
+
     List<Product> findAll();
 
     List<Product> findAllByProductIdList(@Param("productIdList") List<Integer> productIdList);

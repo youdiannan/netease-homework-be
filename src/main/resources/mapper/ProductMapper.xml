@@ -8,15 +8,15 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
     <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="stock" jdbcType="INTEGER" property="stock" />
-    <result column="product_status" jdbcType="TINYINT" property="productStatus"
-            javaType="com.netease.contentsalesystem.constant.ProductStatus"
-            typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"
-    />
+    <result column="sold" jdbcType="INTEGER" property="sold" />
+<!--    <result column="product_status" jdbcType="TINYINT" property="productStatus"-->
+<!--            javaType="com.netease.contentsalesystem.constant.ProductStatus"-->
+<!--            typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"-->
+<!--    />-->
     <result column="seller" jdbcType="INTEGER" property="seller" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, product_abstract, description, img_url, price, stock, product_status, seller
+    id, name, product_abstract, description, img_url, price, sold, seller
   </sql>
   <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -69,12 +69,12 @@
       <if test="price != null">
         price,
       </if>
-      <if test="stock != null">
-        stock,
+      <if test="sold != null">
+        sold,
       </if>
-      <if test="productStatus != null">
-        product_status,
-      </if>
+<!--      <if test="productStatus != null">-->
+<!--        product_status,-->
+<!--      </if>-->
       <if test="seller != null">
         seller
       </if>
@@ -98,12 +98,12 @@
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
       </if>
-      <if test="stock != null">
-        #{stock,jdbcType=INTEGER},
+      <if test="sold != null">
+        #{sold,jdbcType=INTEGER},
       </if>
-      <if test="productStatus != null">
-        #{productStatus,jdbcType=TINYINT},
-      </if>
+<!--      <if test="productStatus != null">-->
+<!--        #{productStatus,jdbcType=TINYINT},-->
+<!--      </if>-->
       <if test="seller != null">
         seller = #{seller,jdbcType=TINYINT}
       </if>
@@ -127,16 +127,23 @@
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="stock != null">
-        stock = #{stock,jdbcType=INTEGER},
+      <if test="sold != null">
+        sold = #{sold,jdbcType=INTEGER},
       </if>
-      <if test="productStatus != null">
-        product_status = #{productStatus,jdbcType=TINYINT},
-      </if>
+<!--      <if test="productStatus != null">-->
+<!--        product_status = #{productStatus,jdbcType=TINYINT},-->
+<!--      </if>-->
       <if test="seller != null">
         seller = #{seller,jdbcType=TINYINT}
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateSold">
+    update product
+    <set>
+      sold = sold + #{count,jdbcType=INTEGER}
+    </set>
+    where id = #{productId,jdbcType=INTEGER}
   </update>
 </mapper>

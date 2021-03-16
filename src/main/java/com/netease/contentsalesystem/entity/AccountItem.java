@@ -1,6 +1,7 @@
 package com.netease.contentsalesystem.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class AccountItem {
     private Long id;
@@ -22,6 +23,17 @@ public class AccountItem {
     private BigDecimal totalAmount;
 
     private String imgUrl;
+
+    // 交易时间
+    private Date transTime;
+
+    public Date getTransTime() {
+        return transTime;
+    }
+
+    public void setTransTime(Date transTime) {
+        this.transTime = transTime;
+    }
 
     public String getProductAbstract() {
         return productAbstract;
