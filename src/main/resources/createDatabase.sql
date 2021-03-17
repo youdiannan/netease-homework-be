@@ -26,15 +26,16 @@ CREATE TABLE `account_item` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(50) NOT NULL,
+  `product_name` varchar(80) NOT NULL,
   `description` varchar(1000) DEFAULT NULL,
   `price` decimal(12,2) DEFAULT NULL,
   `count` int(11) NOT NULL,
   `total_amount` decimal(12,2) NOT NULL,
   `img_url` varchar(255) DEFAULT NULL,
-  `product_abstract` varchar(100) DEFAULT NULL,
+  `product_abstract` varchar(140) DEFAULT NULL,
+  `trans_time` datetime DEFAULT NULL COMMENT '交易时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单子表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单子表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,7 @@ CREATE TABLE `account_item` (
 
 LOCK TABLES `account_item` WRITE;
 /*!40000 ALTER TABLE `account_item` DISABLE KEYS */;
-INSERT INTO `account_item` VALUES (4,1,2,'Java编程思想 （第4版）','本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。\n\n从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书的作者拥有多年教学经验，对C、C++以及Java语言都有独到、深入的见解，以通俗易懂及小而直接的示例解释了一个个晦涩抽象的概念。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、Java I/O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。\n\n第4版特点：\n\n适合初学者与专业人员的经典的面向对象叙述方式，为更新的Java SE5/6增加了新的示例和章节。\n\n 测验框架显示程序输出。',108.00,5,540.00,'https://img9.doubanio.com/view/subject/s/public/s27243455.jpg',NULL);
+INSERT INTO `account_item` VALUES (5,1,2,'Java编程思想 （第4版）','本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。\n\n从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书的作者拥有多年教学经验，对C、C++以及Java语言都有独到、深入的见解，以通俗易懂及小而直接的示例解释了一个个晦涩抽象的概念。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、Java I/O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。\n\n第4版特点：\n\n适合初学者与专业人员的经典的面向对象叙述方式，为更新的Java SE5/6增加了新的示例和章节。\n\n 测验框架显示程序输出。',108.00,4,432.00,'https://img9.doubanio.com/view/subject/s/public/s27243455.jpg','全球程序员的广泛赞','2021-03-16 21:47:50'),(6,1,16,'asdf','asdf',333.00,2,666.00,'/img/5f96147bb1344585be86749f0c63d44b.jpg','tttt','2021-03-17 11:22:48'),(7,1,2,'Java编程思想 （第4版）','本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。\n\n从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书的作者拥有多年教学经验，对C、C++以及Java语言都有独到、深入的见解，以通俗易懂及小而直接的示例解释了一个个晦涩抽象的概念。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、Java I/O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。\n\n第4版特点：\n\n适合初学者与专业人员的经典的面向对象叙述方式，为更新的Java SE5/6增加了新的示例和章节。\n\n 测验框架显示程序输出。',108.00,1,108.00,'https://img9.doubanio.com/view/subject/s/public/s27243455.jpg','全球程序员的广泛赞','2021-03-17 11:35:22');
 /*!40000 ALTER TABLE `account_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,9 +64,9 @@ CREATE TABLE `product` (
   `price` decimal(12,2) NOT NULL,
   `product_status` tinyint(4) DEFAULT NULL COMMENT '0 - 在售\n1 - 下架',
   `seller` int(11) NOT NULL,
-  `stock` int(11) DEFAULT NULL,
+  `sold` int(11) DEFAULT '0' COMMENT '已售出数量',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='商品表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +75,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (2,'Java编程思想 （第4版）','全球程序员的广泛赞','本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。\n\n从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书的作者拥有多年教学经验，对C、C++以及Java语言都有独到、深入的见解，以通俗易懂及小而直接的示例解释了一个个晦涩抽象的概念。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、Java I/O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。\n\n第4版特点：\n\n适合初学者与专业人员的经典的面向对象叙述方式，为更新的Java SE5/6增加了新的示例和章节。\n\n 测验框架显示程序输出。','https://img9.doubanio.com/view/subject/s/public/s27243455.jpg',108.00,NULL,2,NULL),(16,'asdf','tttt','asdf','/img/5f96147bb1344585be86749f0c63d44b.jpg',333.00,NULL,0,NULL);
+INSERT INTO `product` VALUES (2,'Java编程思想 （第4版）','全球程序员的广泛赞','本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。\n\n从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书的作者拥有多年教学经验，对C、C++以及Java语言都有独到、深入的见解，以通俗易懂及小而直接的示例解释了一个个晦涩抽象的概念。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、Java I/O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。\n\n第4版特点：\n\n适合初学者与专业人员的经典的面向对象叙述方式，为更新的Java SE5/6增加了新的示例和章节。\n\n 测验框架显示程序输出。','https://img9.doubanio.com/view/subject/s/public/s27243455.jpg',108.00,NULL,2,5),(16,'asdf','tttt','asdf','/img/5f96147bb1344585be86749f0c63d44b.jpg',333.00,NULL,0,2);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-09 14:02:16
+-- Dump completed on 2021-03-17 12:21:59
