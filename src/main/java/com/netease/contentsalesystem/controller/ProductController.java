@@ -51,6 +51,7 @@ public class ProductController {
         return productService.add(user.getId(), product);
     }
 
+    // TODO: 待抽离
     // 图片上传，返回上传成功后的图片url
     @PostMapping("/api/upload")
     public CommonResponse<Map<String, String>> upload(@RequestParam("file") MultipartFile file) {

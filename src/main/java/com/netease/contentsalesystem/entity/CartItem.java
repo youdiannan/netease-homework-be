@@ -25,6 +25,7 @@ public class CartItem {
 
     private String imgUrl;
 
+    @Min(0)
     private BigDecimal price;
 
     @Min(1)

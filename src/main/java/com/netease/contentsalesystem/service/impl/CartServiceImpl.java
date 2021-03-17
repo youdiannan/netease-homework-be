@@ -72,6 +72,7 @@ public class CartServiceImpl implements ICartService {
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, userId);
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         /**
+         * Redis存储形式:
          * {
          *     cart_#{userId}: {
          *         #{productId} : #{productCount}
@@ -87,8 +88,7 @@ public class CartServiceImpl implements ICartService {
         CommonResponse response = accountService.add(userId, list(userId).getCartItems());
         // 清空购物车
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, userId);
-        ValueOperations<String, String> stringStringValueOperations = stringRedisTemplate.opsForValue();
-        stringStringValueOperations.set(redisKey, "");
+        stringRedisTemplate.delete(redisKey);
         return response;
     }
 }

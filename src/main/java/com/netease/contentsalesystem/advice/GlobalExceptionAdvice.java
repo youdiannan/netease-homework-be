@@ -27,6 +27,7 @@ public class GlobalExceptionAdvice {
         BindingResult bindingResult = e.getBindingResult();
         Objects.requireNonNull(bindingResult.getFieldError());
         return new CommonResponse(ResponseCode.PARAM_ERROR.getCode(),
-                bindingResult.getFieldError().getField() + " " + bindingResult.getFieldError().getDefaultMessage());
+                bindingResult.getFieldError().getField() + " " +
+                        bindingResult.getFieldError().getDefaultMessage());
     }
 }
