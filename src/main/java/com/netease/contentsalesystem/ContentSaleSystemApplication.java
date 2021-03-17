@@ -1,8 +1,11 @@
 package com.netease.contentsalesystem;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.ViewResolver;
@@ -14,9 +17,11 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @MapperScan(basePackages = {"com.netease.contentsalesystem.dao"})
 public class ContentSaleSystemApplication {
 
-    private static final String VIEW_PREFIX = "/static/";
-    private static final String VIEW_SUFFIX = ".html";
-    private static final String VIEW_CONTENT_TYPE = "text/html;charset=UTF-8";
+    @Value("${spring.mvc.view.prefix:/static/}")
+    private String VIEW_PREFIX;
+    @Value("${spring.mvc.view.suffix:.html}")
+    private String VIEW_SUFFIX;
+    private String VIEW_CONTENT_TYPE = "text/html;charset=UTF-8";
 
     public static void main(String[] args) {
         SpringApplication.run(ContentSaleSystemApplication.class, args);
@@ -46,4 +51,11 @@ public class ContentSaleSystemApplication {
         return resolver;
     }
 
+    public void setVIEW_PREFIX(String VIEW_PREFIX) {
+        this.VIEW_PREFIX = VIEW_PREFIX;
+    }
+
+    public void setVIEW_SUFFIX(String VIEW_SUFFIX) {
+        this.VIEW_SUFFIX = VIEW_SUFFIX;
+    }
 }
