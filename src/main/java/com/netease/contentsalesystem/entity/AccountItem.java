@@ -1,5 +1,7 @@
 package com.netease.contentsalesystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -25,6 +27,7 @@ public class AccountItem {
     private String imgUrl;
 
     // 交易时间
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date transTime;
 
     public Date getTransTime() {
