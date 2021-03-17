@@ -49,6 +49,7 @@ public class AccountServiceImpl implements IAccountService {
                     BigDecimal.valueOf(accountItem.getCount())));
             accountItem.setTransTime(transTime);
             insertAccountItems.add(accountItem);
+            // TODO: 批量更新
             // 更新商品表已售出数量
             productMapper.updateSold(accountItem.getProductId(), accountItem.getCount());
         }

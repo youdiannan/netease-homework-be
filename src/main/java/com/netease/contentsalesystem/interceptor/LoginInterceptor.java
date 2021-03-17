@@ -22,15 +22,15 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(CURRENT_USER);
         String uri = request.getRequestURI();
-        if (user == null && (uri.indexOf("/cart") != -1 || uri.indexOf("account") != -1)) {
+        if (user == null && (uri.indexOf("/api/cart") != -1 || uri.indexOf("/api/account") != -1)) {
             response.sendRedirect("/login");
             return false;
         }
-        if (uri.indexOf("/product") != -1 && request.getMethod().equalsIgnoreCase("POST")
-        && user.getUserType() != UserType.SELLER) {
+        if (uri.indexOf("/api/product") != -1 && request.getMethod().equalsIgnoreCase("POST")
+        && (user == null || user.getUserType() != UserType.SELLER)) {
             throw new LoginException("请以卖家账户登录");
         }
-        if (uri.indexOf("/upload") != -1 && user.getUserType() != UserType.SELLER) {
+        if (uri.indexOf("/api/upload") != -1 && (user == null || user.getUserType() != UserType.SELLER)) {
             throw new LoginException("请以卖家账户登录");
         }
         return true;

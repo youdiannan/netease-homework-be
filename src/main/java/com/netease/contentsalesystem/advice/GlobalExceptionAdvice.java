@@ -16,7 +16,7 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler(LoginException.class)
     public CommonResponse handleLoginException(LoginException e) {
-        CommonResponse response = new CommonResponse(ResponseCode.FAILED.getCode(), "用户名或密码错误");
+        CommonResponse response = new CommonResponse(ResponseCode.FAILED.getCode(), e.getMessage());
         // response.setData(e.getMessage());
         return response;
     }

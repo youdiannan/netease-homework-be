@@ -118,7 +118,7 @@
     </trim>
   </insert>
   <insert id="batchInsert" parameterType="list">
-    <!-- TODO: rewrite -->
+    <!-- TODO: rewrite column list-->
     insert into account_item (
     user_id, product_id, product_name, description, price, count, total_amount, img_url, product_abstract, trans_time
     )
