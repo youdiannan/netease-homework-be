@@ -79,7 +79,12 @@ public class CartServiceImpl implements ICartService {
          *     }
          * }
          */
-        hashOperations.put(redisKey, String.valueOf(cartItem.getProductId()), String.valueOf(cartItem.getCount()));
+        if (cartItem.getCount().equals(0)) {
+            // 数量为0：无效操作或者删除
+            hashOperations.delete(redisKey, String.valueOf(cartItem.getProductId()));
+        } else {
+            hashOperations.put(redisKey, String.valueOf(cartItem.getProductId()), String.valueOf(cartItem.getCount()));
+        }
         return new CommonResponse(ResponseCode.SUCCESS.getCode(), "添加成功");
     }
 
