@@ -38,7 +38,7 @@ public class ProductController {
     public CommonResponse edit(HttpSession session, @RequestBody @Valid Product product) {
         // 编辑时需保证商品id不为空
         if (null == product.getId()) {
-            return new CommonResponse(ResponseCode.FAILED);
+            return new CommonResponse(ResponseCode.PARAM_ERROR.getCode(), "商品id为空");
         }
         User user = (User) session.getAttribute(CURRENT_USER);
         return productService.edit(user.getId(), product);
