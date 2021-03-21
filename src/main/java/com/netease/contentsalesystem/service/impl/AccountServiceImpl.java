@@ -36,6 +36,9 @@ public class AccountServiceImpl implements IAccountService {
 
     @Transactional
     public CommonResponse add(Integer userId, List<CartItem> cartItemList) {
+        if (cartItemList == null) {
+            return new CommonResponse(ResponseCode.FAILED.getCode(), "购物车为空");
+        }
         // TODO: 异常处理
         Date transTime = new Date(); // 交易时间
         List<AccountItem> insertAccountItems = new ArrayList<>();

@@ -28,7 +28,7 @@ public class CartItem {
     @Min(0)
     private BigDecimal price;
 
-    @Min(0)
+    @Min(1)
     private Integer count;
 
     private Integer seller;

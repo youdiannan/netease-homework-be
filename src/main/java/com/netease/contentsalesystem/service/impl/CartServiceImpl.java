@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -41,7 +40,9 @@ public class CartServiceImpl implements ICartService {
         HashOperations<String, String, String> hashOperations = stringRedisTemplate.opsForHash();
         // 获取用户对应的购物车所有商品数据
         Map<String, String> entries = hashOperations.entries(redisKey);
-        if (entries.isEmpty()) return new Cart();
+        if (entries.isEmpty()) {
+            return new Cart();
+        }
 
         // 根据productId获取商品数据
         List<Integer> productIds = entries.keySet().stream().map(Integer::parseInt).collect(Collectors.toList());
@@ -79,13 +80,16 @@ public class CartServiceImpl implements ICartService {
          *     }
          * }
          */
-        if (cartItem.getCount().equals(0)) {
-            // 数量为0：无效操作或者删除
-            hashOperations.delete(redisKey, String.valueOf(cartItem.getProductId()));
-        } else {
-            hashOperations.put(redisKey, String.valueOf(cartItem.getProductId()), String.valueOf(cartItem.getCount()));
-        }
+        hashOperations.put(redisKey, String.valueOf(cartItem.getProductId()), String.valueOf(cartItem.getCount()));
         return new CommonResponse(ResponseCode.SUCCESS.getCode(), "添加成功");
+    }
+
+    @Override
+    public CommonResponse delete(Integer userId, Integer productId) {
+        String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, userId);
+        HashOperations<String, Object, Object> hashOperations = stringRedisTemplate.opsForHash();
+        hashOperations.delete(redisKey, String.valueOf(productId));
+        return new CommonResponse(ResponseCode.SUCCESS);
     }
 
     @Override

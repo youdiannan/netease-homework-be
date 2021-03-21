@@ -11,4 +11,6 @@ public interface ICartService {
     CommonResponse edit(Integer userId, CartItem cartItem);
 
     CommonResponse checkout(Integer userId);
+
+    CommonResponse delete(Integer userId, Integer productId);
 }

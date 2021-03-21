@@ -6,10 +6,7 @@ import com.netease.contentsalesystem.service.ICartService;
 import com.netease.contentsalesystem.entity.CartItem;
 import com.netease.contentsalesystem.vo.CommonResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -39,6 +36,12 @@ public class CartController {
     public CommonResponse checkout(HttpSession session) {
         User user = (User) session.getAttribute(CURRENT_USER);
         return cartService.checkout(user.getId());
+    }
+
+    @DeleteMapping("/api/cart/{productId}")
+    public CommonResponse delete(HttpSession session, @PathVariable("productId") Integer productId) {
+        User user = (User) session.getAttribute(CURRENT_USER);
+        return cartService.delete(user.getId(), productId);
     }
 
 }
