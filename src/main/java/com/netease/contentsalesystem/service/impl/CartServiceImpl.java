@@ -88,6 +88,9 @@ public class CartServiceImpl implements ICartService {
     public CommonResponse delete(Integer userId, Integer productId) {
         String redisKey = String.format(CART_REDIS_KEY_TEMPLATE, userId);
         HashOperations<String, Object, Object> hashOperations = stringRedisTemplate.opsForHash();
+        if (!hashOperations.hasKey(redisKey, String.valueOf(productId))) {
+            return new CommonResponse(ResponseCode.PARAM_ERROR.getCode(), "该商品不在购物车内");
+        }
         hashOperations.delete(redisKey, String.valueOf(productId));
         return new CommonResponse(ResponseCode.SUCCESS);
     }
